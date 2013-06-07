@@ -31,12 +31,12 @@
 
 class UdpSocket {
 private:
-	int s; // this is used to store the socket
+    int s; // this is used to store the socket
 
 public:
-    UdpSocket(void);
-    ~UdpSocket(void);
-    int send(char *, int, char *); // send a message to a udp server
+	UdpSocket(void);
+	~UdpSocket(void);
+	int send(char *, int, char *); // send a message to a udp server
 };
 
 #endif
