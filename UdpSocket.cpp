@@ -30,21 +30,20 @@ UdpSocket::~UdpSocket(void) {
 }
 
 int UdpSocket::send(char *server, int port, char *msg) {
-  struct sockaddr_in s_self, s_remote;
+  struct sockaddr_in s_remote;
 
-  memset((char *)&s_remote, 0, sizeof(s_remote));
+  // set up socket
+  bzero(&s_remote, sizeof(s_remote));
   s_remote.sin_family = AF_INET;
   s_remote.sin_port = htons(port);
 
-  struct hostent *h_remote = gethostbyname((char *)server);
-  char *ip = inet_ntoa(*(struct in_addr*)h_remote->h_addr_list);
+  // resolve hostname and set IP
+  struct hostent *h_remote = gethostbyname(server);
+  char *ip = inet_ntoa((*(struct in_addr **)h_remote->h_addr_list)[0]);
+  s_remote.sin_addr.s_addr = inet_addr(ip);
 
-  if (inet_aton((char *)ip, &s_remote.sin_addr) == 0) {
-    std::cerr << __FILE__ << ":" << __LINE__ << ": inet_aton() failed." << std::endl;
-    return -1;
-  }
-
-  if (sendto(s, msg, strlen((char *)msg), 0, (sockaddr*)&s_remote, sizeof(s_remote)) == -1) {
+  // send message
+  if (sendto(s, msg, strlen(msg), 0, (struct sockaddr*)&s_remote, sizeof(s_remote)) == -1) {
     std::cerr << __FILE__ << ":" << __LINE__ << ": sendto() failed." << std::endl;
     return -1;
   }

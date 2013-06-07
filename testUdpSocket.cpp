@@ -19,6 +19,9 @@
 
 int main() {
     UdpSocket *test = new UdpSocket(); // create socket
-    test->send("localhost", 1111, "daytime"); // send message
-    delete test; // close socket
+    if (test->send("localhost", 1337, "test") == 0) { // send message
+    	std::cout << "success!" << std::endl;
+        delete test; // close socket
+    	return 0;
+    } else return -1;
 }
