@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  TLayTouch.cpp
+ *       Filename:  testUdpSocket.cpp
  *
- *    Description:  The official C++ implementation of the TLay Touch protocol.
+ *    Description:  Testing the UdpSocket object.
  *
  *        Version:  1.0.0
- *        Created:  06/07/2013 08:36:41 PM
+ *        Created:  06/07/2013 10:11:54 PM
  *       Compiler:  g++
  *
  *         Author:  Daniel Bugl <daniel.bugl@touchlay.com>
@@ -14,3 +14,11 @@
  *
  * =====================================================================================
  */
+
+#include "UdpSocket.h"
+
+int main() {
+    UdpSocket *test = new UdpSocket(); // create socket
+    test->send("localhost", 1111, "daytime"); // send message
+    delete test; // close socket
+}
