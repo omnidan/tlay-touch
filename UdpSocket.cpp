@@ -19,14 +19,14 @@
 
 UdpSocket::UdpSocket(void) {
   if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
-    std::cerr << __FILE__ << ": Couldn't create socket." << std::endl;
-  std::cout << __FILE__ << ": Socket initialized. (s=" << s << ")" << std::endl;
+    std::cerr << __FILE__ << ":" << __LINE__ << ": Couldn't create socket." << std::endl;
+  std::cout << __FILE__ << ":" << __LINE__ << ": Socket initialized. (s=" << s << ")" << std::endl;
 }
 
 UdpSocket::~UdpSocket(void) {
   if (close(s) != 0)
-    std::cerr << __FILE__ << ": Couldn't close socket." << std::endl;
-  std::cout << __FILE__ << ": Socket unloaded. (s=" << s << ")" << std::endl;
+    std::cerr << __FILE__ << ":" << __LINE__ << ": Couldn't close socket." << std::endl;
+  std::cout << __FILE__ << ":" << __LINE__ << ": Socket unloaded. (s=" << s << ")" << std::endl;
 }
 
 int UdpSocket::send(char *server, int port, char *msg) {
@@ -40,12 +40,12 @@ int UdpSocket::send(char *server, int port, char *msg) {
   char *ip = inet_ntoa(*(struct in_addr*)h_remote->h_addr_list);
 
   if (inet_aton((char *)ip, &s_remote.sin_addr) == 0) {
-    std::cerr << __FILE__ << ": inet_aton() failed." << std::endl;
+    std::cerr << __FILE__ << ":" << __LINE__ << ": inet_aton() failed." << std::endl;
     return -1;
   }
 
   if (sendto(s, msg, strlen((char *)msg), 0, (sockaddr*)&s_remote, sizeof(s_remote)) == -1) {
-    std::cerr << __FILE__ << ": sendto() failed." << std::endl;
+    std::cerr << __FILE__ << ":" << __LINE__ << ": sendto() failed." << std::endl;
     return -1;
   }
 
