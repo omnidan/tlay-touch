@@ -19,7 +19,7 @@
 
 int main() {
     UdpSocket *test = new UdpSocket(); // create socket
-    if (test->send("localhost", 1337, "test") == 0) { // send message
+    if (test->send("localhost", 1337, "{\"test\": true}") == 0) { // send message
     	std::cout << "success!" << std::endl;
         delete test; // close socket
     	return 0;

@@ -17,7 +17,7 @@
 
 // this is a sample udp server for now, later, there should be a class here
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 1024
 #define PORT 1337
 
 // standard headers
@@ -28,7 +28,13 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+// json headers
+#include "json/json.h"
+
 int main (int argc, char* argv[]) {
+  Json::Reader jReader;
+  Json::Value jRoot;
+
   int s, n;
   struct sockaddr_in s_self, s_remote;
   char buf[BUFFER_SIZE];
@@ -47,5 +53,10 @@ int main (int argc, char* argv[]) {
     sendto(s, buf, n, 0, (struct sockaddr *)&s_remote, sizeof(s_remote));
     buf[n] = 0;
     std::cout << "RECV: " << buf << std::endl;
+    if (!jReader.parse(buf, jRoot, false)) {
+      std::cout << "DECODED: Invalid JSON (" << buf << ")." << std::endl;
+    } else {
+      std::cout << "DECODED: " << jRoot << "(" << buf << ")." << std::endl;
+    }
   }
 }
