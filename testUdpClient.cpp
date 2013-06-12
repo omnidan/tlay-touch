@@ -15,10 +15,10 @@
  * =====================================================================================
  */
 
-#include "UdpSocket.h"
+#include "UdpClient.h"
 
 int main() {
-    UdpSocket *test = new UdpSocket(); // create socket
+    UdpClient *test = new UdpClient(); // create socket
     if (test->send("localhost", 1337, "{\"test\": true}") == 0) { // send message
     	std::cout << "success!" << std::endl;
         delete test; // close socket

@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  UdpSocket.cpp
+ *       Filename:  UdpClient.cpp
  *
  *    Description:  Small UDP socket manager.
  *
@@ -15,21 +15,21 @@
  * =====================================================================================
  */
 
-#include "UdpSocket.h"
+#include "UdpClient.h"
 
-UdpSocket::UdpSocket(void) {
+UdpClient::UdpClient(void) {
   if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
     std::cerr << __FILE__ << ":" << __LINE__ << ": Couldn't create socket." << std::endl;
   std::cout << __FILE__ << ":" << __LINE__ << ": Socket initialized. (s=" << s << ")" << std::endl;
 }
 
-UdpSocket::~UdpSocket(void) {
+UdpClient::~UdpClient(void) {
   if (close(s) != 0)
     std::cerr << __FILE__ << ":" << __LINE__ << ": Couldn't close socket." << std::endl;
   std::cout << __FILE__ << ":" << __LINE__ << ": Socket unloaded. (s=" << s << ")" << std::endl;
 }
 
-int UdpSocket::send(char *server, int port, char *msg) {
+int UdpClient::send(char *server, int port, char *msg) {
   struct sockaddr_in s_remote;
 
   // set up socket

@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  UdpSocket.h
+ *       Filename:  UdpClient.h
  *
  *    Description:  Headers for the small UDP socket manager.
  *
@@ -15,8 +15,8 @@
  * =====================================================================================
  */
 
-#ifndef _UDPSOCKET_H_
-#define _UDPSOCKET_H_
+#ifndef _UDPCLIENT_H_
+#define _UDPCLIENT_H_
 
 // standard headers
 #include <iostream>
@@ -29,13 +29,13 @@
 #include <netdb.h>
 
 
-class UdpSocket {
+class UdpClient {
 private:
     int s; // this is used to store the socket
 
 public:
-    UdpSocket(void);
-    ~UdpSocket(void);
+    UdpClient(void);
+    ~UdpClient(void);
     int send(char *, int, char *); // send a message to a udp server
 };
 
