@@ -21,7 +21,7 @@
 
 int main() {
     UdpClient *test = new UdpClient(); // create socket
-    TLayTouch *tt = new TLayTouch("example", 1, 0.5, 0.5, 0, 0, 0, 0);
+    TLayTouch *tt = new TLayTouch("example", 0, 1, 0.5, 0.5, 0, 0, 0, 0, 0);
     if (test->send("localhost", 4444, (char *)tt->jexport().c_str()) == 0) { // send message
     	std::cout << "success!" << std::endl;
     	delete tt; // delete touch event
