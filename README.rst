@@ -39,6 +39,7 @@ And an example:
   "s": "TUIOdroid@fe80::646:dead:beef:cafe%wlan0/tuio/2Dcur"
 
 The "a" variable (action) can be set to the following integers:
+
 * 0 - undefined action
 * 1 - add cursor/object
 * 2 - update cursor/object
