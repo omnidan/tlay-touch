@@ -23,6 +23,7 @@ int loop(std::string buf) {
 	std::cout << "RECV: " << buf << std::endl;
 	TLayTouch *tt = new TLayTouch(buf);
 	std::cout << "EXPO: " << tt->jexport() << std::endl;
+	if (tt->jexport() == buf) std::cout << "RECV AND EXPO MATCH! (SUCCESS!)" << std::endl;
 	delete tt;
     return 0; // if this is not 0, loop returns the error code
 }
