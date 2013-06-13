@@ -14,3 +14,71 @@
  *
  * =====================================================================================
  */
+
+#include "TLayTouch.h"
+
+TLayTouch::TLayTouch(std::string source, int session_id, float x_position, float y_position, float x_velocity, float y_velocity, float angle, float motion_acceleration) {
+  s  = source;
+  id = session_id;
+  xp = x_position;
+  yp = y_position;
+  xv = x_velocity;
+  yv = y_velocity;
+  a  = angle;
+  ma = motion_acceleration;
+  #ifdef DEBUG
+  std::cout << __FILE__ << ":" << __LINE__ << ": TLayTouch event created. (s=\"" << s
+                                                                     << "\",id=" << id
+                                                                     << ",xp=" << xp
+                                                                     << ",yp=" << yp
+                                                                     << ",xv=" << xv
+                                                                     << ",yv=" << yv
+                                                                     << ",a="  << a
+                                                                     << ",ma=" << ma
+                                                                     << ")"    << std::endl;
+  #endif
+}
+
+TLayTouch::TLayTouch(std::string json_string) {
+  jimport(json_string);
+}
+
+bool TLayTouch::jimport(std::string json_string) {
+  Json::Reader jReader;
+  Json::Value jRoot;
+
+  if (!jReader.parse(json_string, jRoot, false)) {
+    #ifdef DEBUG
+    std::cout << __FILE__ << ":" << __LINE__ << ": TLayTouch event creation failed. (Invalid JSON: '" << json_string << "')";
+    #endif
+    return false;
+  } else {
+    // TODO: Import JSON here
+      #ifdef DEBUG
+      std::cout << __FILE__ << ":" << __LINE__ << ": TLayTouch event created from JSON. (json_string=\"" << json_string
+                                                                         << "\",s=\""  << s
+                                                                         << "\",id=" << id
+                                                                         << ",xp=" << xp
+                                                                         << ",yp=" << yp
+                                                                         << ",xv=" << xv
+                                                                         << ",yv=" << yv
+                                                                         << ",a="  << a
+                                                                         << ",ma=" << ma
+                                                                         << ")"    << std::endl;
+      #endif
+  }
+}
+
+std::string TLayTouch::jexport(void) {
+  std::stringstream ss;
+  ss << "{\"s\": \""   << s  <<
+        "\", \"id\": " << id <<
+        ", \"xp\": "  << xp <<
+        ", \"yp\": "  << yp <<
+        ", \"xv\": "  << xv <<
+        ", \"yv\": "  << yv <<
+        ", \"a\": "   << a  <<
+        ", \"ma\": "  << ma <<
+        "}";
+  return ss.str();
+}

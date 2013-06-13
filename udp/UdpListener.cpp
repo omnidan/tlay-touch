@@ -17,13 +17,14 @@
 
 #include "UdpListener.h"
 
-UdpListener::UdpListener(void) {
+UdpListener::UdpListener(int port=4444) {
+  // build the socket
   s = socket(AF_INET, SOCK_DGRAM, 0);
 
   bzero(&s_self, sizeof(s_self));
   s_self.sin_family = AF_INET;
   s_self.sin_addr.s_addr = htonl(INADDR_ANY);
-  s_self.sin_port = htons(PORT);
+  s_self.sin_port = htons(port);
 
   bind(s, (struct sockaddr *)&s_self, sizeof(s_self));
 }

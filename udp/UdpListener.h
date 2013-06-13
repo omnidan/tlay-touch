@@ -19,8 +19,7 @@
 #define _UDPLISTENER_H_
 
 // configuration
-#define BUFFER_SIZE 1024
-#define PORT 1337
+#define BUFFER_SIZE 256 // TODO: Check if this value is okay
 
 // standard headers
 #include <iostream>
@@ -37,7 +36,7 @@ private:
     struct sockaddr_in s_self, s_remote;
 
 public:
-    UdpListener(void);
+    UdpListener(int);
     ~UdpListener(void);
     int loop(int (*f)(std::string));
 };

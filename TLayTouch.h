@@ -15,3 +15,29 @@
  * =====================================================================================
  */
 
+#ifndef _TLAYTOUCH_H_
+#define _TLAYTOUCH_H_
+
+// standard headers
+#include <iostream>
+#include <string>
+#include <sstream>
+
+// json headers
+#include "json/json.h"
+
+
+class TLayTouch {	
+public:
+    std::string s; // source
+    int id; // session id
+    float xp, yp, xv, yv; // positions and velocity
+    float a, ma; // angle and motion acceleration
+
+    TLayTouch(std::string, int, float, float, float, float, float, float); // create new object
+    TLayTouch(std::string); // overloaded function, import message from JSON
+    bool jimport(std::string); // import message from JSON
+    std::string jexport(void); // export message as JSON
+};
+
+#endif
